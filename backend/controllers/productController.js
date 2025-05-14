@@ -8,10 +8,6 @@ export const getProducts = async (req, res) => {
             ORDER BY created_at DESC
         `;
 
-        if (products.length === 0) {
-            return res.status(404).json({ success: false, message: "No products found" });
-        }
-
         console.log("Fetched all products");
         res.status(200).json({ success: true, data: products });
     } catch (error) {
@@ -63,7 +59,7 @@ export const createProduct = async (req, res) => {
 
 export const updateProduct = async (req, res) => {
     const { id } = req.params;
-    const {name, price, image} = req.body;
+    const { name, price, image } = req.body;
 
     try {
         const updatedProduct = await sql`
@@ -97,7 +93,7 @@ export const deleteProduct = async (req, res) => {
             return res.status(404).json({ success: false, message: "Product not found" });
         }
 
-        res.status(200).json({ success: true, data: deleteProduct[0] })
+        res.status(200).json({ success: true, data: deletedProduct[0] })
     } catch (error) {
         console.log("Error in deleteProduct: ", error);
         res.status(500).json({ success: false, message: "Internal server error" }); 

@@ -18,7 +18,7 @@ app.use(helmet()); //Help protect app by setting various http headers
 app.use(morgan("dev")); //Logs requests
 app.use(cors());
 
-//aply arcjet
+//apply arcjet
 app.use(async (req, res, next) => {
     try {
         const decision = await aj.protect(req, {
